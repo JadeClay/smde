@@ -1,5 +1,5 @@
 import React from 'react';
-import {Divider, Paper, TextField, Box, Button, Stack, Switch, FormControlLabel} from "@mui/material";
+import {Divider, Paper, TextField, Box, Button, Stack} from "@mui/material";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import {AccountCircle} from "@mui/icons-material";
@@ -17,7 +17,7 @@ const CreateAthlete = props => {
     }
 
     const handleSubmit = () => {
-        fetch(`http://localhost:3001/athletes/create`, {
+        fetch(`http://51.222.27.252:3001/athletes/create`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

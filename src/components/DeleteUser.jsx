@@ -15,13 +15,13 @@ import PersonRemoveIcon from '@mui/icons-material/PersonRemove';
 import {useRouter} from "next/router";
 
 const DeleteUser = props => {
-    const [selectedUser, setSelectedUser] = React.useState('');
+    const [selectedUser, setSelectedUser] = React.useState(0);
     const [users, setUsers] = React.useState([]);
     const token = getCookie('token');
     const router = useRouter();
 
     React.useEffect(() => {
-        fetch(`http://localhost:3001/auth/users`, {
+        fetch(`http://51.222.27.252:3001/auth/users`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -37,22 +37,21 @@ const DeleteUser = props => {
     };
 
     const handleSubmit = () => {
-        fetch(`http://localhost:3001/auth/users/delete`, {
+        fetch(`http://51.222.27.252:3001/auth/users/delete`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ` + token,
             },
             body: JSON.stringify({
-                '_id': selectedUser
+                'id': selectedUser
             }),
         }).then(response => response.json()).then(r => {
-            if(r.error){alert("Error al eliminar el usuario usuario"); console.log(r.error)}else{alert("Usuario borrado con éxito"); router.reload()}
+            if(r.error){alert("Error al eliminar el usuario"); console.log(r.error)}else{alert("Usuario borrado con éxito"); router.reload()}
         });
     }
     return (
         <Paper style={{'margin-top': '10vh',}} elevation={5}>
-            {console.log(users)}
             <Container style={{'padding': '10px 50px'}}>
                 <Typography variant={"h4"} align={'center'}>
                     <PersonRemoveIcon fontSize={"inherit"} style={{'vertical-align': '-6px'}}/> Borrar usuario
@@ -71,7 +70,7 @@ const DeleteUser = props => {
                                     onChange={handleChange}
                                 >
                                     {users.map(user => (
-                                        <MenuItem key={user._id} value={user._id}>{user.username}</MenuItem>
+                                        <MenuItem key={user.id} value={user.id}>{user.username}</MenuItem>
                                     ))}
                                 </Select>
                             </FormControl>

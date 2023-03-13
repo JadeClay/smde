@@ -31,6 +31,13 @@ export default function SessionsList({athlete, refresh}) {
             valueGetter: ({value}) => value + " metros",
         },
         {
+            field: 'type',
+            headerName: 'Tipo de Nado',
+            description: 'Fue nado abierto o en piscina',
+            width: 260,
+            valueGetter: ({value}) => value == 1 ? "Piscina" : "Nado Abierto",
+        },
+        {
             field: 'actions',
             type: 'actions',
             headerName: 'Ver más',
@@ -62,7 +69,7 @@ export default function SessionsList({athlete, refresh}) {
     })
 
     React.useEffect(() => {
-        fetch(`http://localhost:3001/sessions/get/${athlete}`, {
+        fetch(`http://51.222.27.252:3001/sessions/get/${athlete}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -74,7 +81,7 @@ export default function SessionsList({athlete, refresh}) {
     },[athleteId]);
 
     React.useEffect(() => {
-        fetch(`http://localhost:3001/sessions/get/${athlete}`, {
+        fetch(`http://51.222.27.252:3001/sessions/get/${athlete}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -90,7 +97,7 @@ export default function SessionsList({athlete, refresh}) {
             {console.log(rows)}
             <Box sx={{ height: 400, width: '100%' }}>
                 <DataGrid
-                    getRowId={(row) => row._id}
+                    getRowId={(row) => row.id}
                     rows={rows}
                     columns={columns}
                     initialState={{

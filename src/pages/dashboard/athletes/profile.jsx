@@ -20,7 +20,7 @@ export default function Profile() {
 
 
     React.useEffect(() => {
-        fetch(`http://localhost:3001/athletes/get`, {
+        fetch(`http://51.222.27.252:3001/athletes/get`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -38,12 +38,12 @@ export default function Profile() {
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={3}>
                         <Stack>
-                            <ModifyAthlete name={athlete.name}/>
-                            <UploadSession id={athlete._id} refresh={refreshTable}/>
+                            <ModifyAthlete name={athlete.name} id={athlete.id}/>
+                            <UploadSession id={athlete.id} refresh={refreshTable}/>
                         </Stack>
                     </Grid>
                     <Grid item xs={12} md={9}>
-                        <SessionsList athlete={athlete._id} refresh={reload}/>
+                        <SessionsList athlete={athlete.id} refresh={reload}/>
                     </Grid>
                 </Grid>
             }

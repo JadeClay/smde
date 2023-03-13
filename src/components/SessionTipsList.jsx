@@ -7,7 +7,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import {getCookie} from "cookies-next";
-import {useRouter} from "next/router";
 
 function provideSwimmingTips(timeSpent, distanceSwum, avgStrokes, pace, idealTime, idealStrokes, idealPace) {
     let tips = [];
@@ -22,9 +21,9 @@ function provideSwimmingTips(timeSpent, distanceSwum, avgStrokes, pace, idealTim
     }
 
     // Offer training tips
-    if (timeSpent > idealTime) {
+    if (timeSpent >= idealTime) {
         tips.push('Trata de añadir más distancia a tus sesiones, para construir mayor resistencia. También puedes incluir cardio a tu rutina.');
-    } else if (idealTime > timeSpent) {
+    } else if (idealTime >= timeSpent) {
         tips.push('Toma ciertos descansos durante largas sesiones de nado, para evitar fatiga y lesiones');
     } else {
         tips.push('Continúa con el buen trabajo en las rutinas de entrenamiento.');
@@ -77,32 +76,29 @@ const SessionTipsList = props => {
     const [pace, setPace] = React.useState(0);
     const [strokes, setStrokes] = React.useState(0);
     const [time, setTime] = React.useState(0);
-    const [distance, setDistance] = React.useState(0);
     const [idealStrokes, setIdealStrokes] = React.useState(0);
     const [idealTime, setIdealTime] = React.useState(0);
     const [idealPace, setIdealPace] = React.useState(0);
     const token = getCookie('token');
-    const router = useRouter();
 
     React.useEffect(() => {
         toggleActualize(props.session);
     })
 
     React.useEffect(() => {
-        fetch(`http://localhost:3001/sessions/${props.session}`, {
+        fetch(`http://51.222.27.252:3001/sessions/${props.session}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ` + token,
             }
         }).then(response => response.json()).then(response => {
-            setPace(response.Sessions.avg_pace);
-            setStrokes(response.Sessions.avg_strokes);
-            setTime(response.Sessions.time_done);
-            setDistance(response.Sessions.distance);
-            setIdealTime(response.Sessions.ideal_time);
-            setIdealStrokes(response.Sessions.ideal_strokes);
-            setIdealPace(response.Sessions.ideal_pace);
+            setPace(response.Sessions[0].avg_pace);
+            setStrokes(response.Sessions[0].avg_strokes);
+            setTime(response.Sessions[0].time_done);
+            setIdealTime(response.Sessions[0].ideal_time);
+            setIdealStrokes(response.Sessions[0].ideal_strokes);
+            setIdealPace(response.Sessions[0].ideal_pace);
         })
     }, [actualize]);
 

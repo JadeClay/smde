@@ -40,7 +40,7 @@ function Navbar() {
                         }}
                         onClick={() => router.push("/dashboard")}
                     >
-                        SwimFit
+                        SMDE
                     </Typography>
                     <Box sx={{ flexGrow: 1, display: 'flex' }}>
                         <Button

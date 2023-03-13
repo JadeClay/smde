@@ -16,24 +16,21 @@ const LoginForm = props => {
 
     const handleUsername = (e) => {
         setUsername(e.target.value);
-        console.log(username);
     }
 
     const handlePassword = (e) => {
         setPassword(e.target.value);
-        console.log(password);
     }
 
     const handleSubmit = () => {
-        fetch(`http://localhost:3001/auth/login`, {
+        fetch(`http://51.222.27.252:3001/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
                 'username': username,
                 'password': password
-            }),
+            })
         }).then(response => response.json()).then(r => {
-            console.log(r);
             if(r.token){
                 setCookie('isAdmin', r.user.isAdmin);
                 setCookie('username', r.user.username);
@@ -48,7 +45,7 @@ const LoginForm = props => {
             <Paper style={{'margin-top': '35vh', 'margin-bottom': '36vh'}}>
                 <Container style={{'padding': '10px 100px'}}>
                     <Typography variant={"h4"} align={'center'}>
-                        <PoolIcon fontSize={"inherit"} style={{'vertical-align': '-6px'}}/> SwimFit
+                        <PoolIcon fontSize={"inherit"} style={{'vertical-align': '-6px'}}/> SMDE
                     </Typography>
                     <Divider />
                     <Box sx={{ml: 7}}>

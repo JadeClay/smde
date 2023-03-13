@@ -28,7 +28,7 @@ const CreateUser = props => {
     }
 
     const handleSubmit = () => {
-        fetch(`http://localhost:3001/auth/signup`, {
+        fetch(`http://51.222.27.252:3001/auth/signup`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

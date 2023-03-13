@@ -4,7 +4,7 @@ import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
 import Navbar from './components/navbar'
-import {createTheme, Stack, ThemeProvider, useTheme} from "@mui/material";
+import {createTheme, Stack, ThemeProvider} from "@mui/material";
 import Container from "@mui/material/Container";
 import Box from "@mui/material/Box";
 import Footer from "@/components/Footer";
@@ -25,8 +25,8 @@ export default function Layout({ children, size, navbar }) {
     return (
         <ThemeProvider theme={theme}>
             <Head>
-                <title>SwimFit</title>
-                <meta name="description" content="Aplicacion para evaluar rendimiento en nado" />
+                <title>SMDE</title>
+                <meta name="description" content="Sistema de monitoreo deportivo con dispositivo electrónico" />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
                 <link rel="icon" href="/favicon.ico" />
             </Head>

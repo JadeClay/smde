@@ -7,7 +7,6 @@ import SessionInfo from "@/components/SessionInfo";
 import SessionTipsList from "@/components/SessionTipsList";
 
 export default function Profile() {
-    const token = getCookie('token');
     const username = getCookie('username');
     const router = useRouter();
     const data = router.query;

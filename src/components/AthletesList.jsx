@@ -4,13 +4,11 @@ import {DataGrid, GridActionsCellItem} from '@mui/x-data-grid';
 import {Paper} from "@mui/material";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import {getCookie} from "cookies-next";
-import {useRouter} from "next/router";
 import Link from "next/link";
 
 export default function AthletesList() {
     const [rows, setRows] = React.useState([]);
     const token = getCookie('token');
-    const router = useRouter();
     const columns = [
         {
             field: 'name',
@@ -48,7 +46,7 @@ export default function AthletesList() {
     ];
 
     React.useEffect(() => {
-        fetch(`http://localhost:3001/athletes/athletes`, {
+        fetch(`http://51.222.27.252:3001/athletes/athletes`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -63,7 +61,7 @@ export default function AthletesList() {
         <Paper style={{'margin-top': '10vh'}} elevation={5}>
             <Box sx={{ height: 400, width: '100%' }}>
                 <DataGrid
-                    getRowId={(row) => row._id}
+                    getRowId={(row) => row.id}
                     rows={rows}
                     columns={columns}
                     initialState={{
